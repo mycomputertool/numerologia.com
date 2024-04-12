@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculation</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    label {
+        font-weight: bold;
+    }
+    input[type="text"] {
+        padding: 5px;
+        margin: 5px 0;
+    }
+    button {
+        padding: 8px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    button:hover {
+        background-color: green;
+    }
+    #results {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body style="background-color:yellowgreen">
+
+<h2 style="color:white">Name Calculator</h2>
+<br>
+<label for="inputString">Enter a string:</label><br>
+<input type="text" id="inputString" placeholder="Type something..."><br>
+<button id="calculateButton" onclick="calculate()">Calculate ✅</button>
+<button id="refreshButton" style="background-color:red;" onclick="refresh()">Refresh or Delete ⛔</button>
+
+<div id="results"></div>
+
+<script>
+    function calculate() {
+        var input = document.getElementById("inputString").value;
+        var totalLetters = 0;
+        var decentLetters = "";
+        var additionalLetters = "";
+
+        for (var i = 0; i < input.length; i++) {
+            var c = input[i].toUpperCase();
+            if (c.match(/[A-Z]/i)) {
+                totalLetters++;
+                if (decentLetters.indexOf(c) === -1) {
+                    decentLetters += c;
+                } else {
+                    additionalLetters += c;
+                }
+            }
+        }
+
+        var resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = "<h3>Letter Calculation</h3>";
+
+        
+        resultsDiv.innerHTML += "<h4>Py Number:</h4>";
+        resultsDiv.innerHTML += "<p><strong>:</strong> " + input + " = " + totalLetters + " = " + calculateLettersAddition(input, true) + "</p>";
+        resultsDiv.innerHTML += "<p><strong>:</strong> " + additionalLetters + " = " + additionalLetters.length + " = " + calculateLettersAddition(additionalLetters, true) + "</p>";
+        resultsDiv.innerHTML += "<p><strong>:</strong> " + decentLetters + " = " + decentLetters.length + " = " + calculateLettersAddition(decentLetters, true) + "</p>";
+        
+        resultsDiv.innerHTML += "<h4>Mystical Wheel Number:</h4>";
+        resultsDiv.innerHTML += "<p>" + calculateLettersAddition(input, false) + "</p>";
+        resultsDiv.innerHTML += "<p>" + calculateLettersAddition(additionalLetters, false) + "</p>";
+        resultsDiv.innerHTML += "<p>" + calculateLettersAddition(decentLetters, false) + "</p>";
+
+        // Custom Calculation
+        resultsDiv.innerHTML += "<h4>Alphabet Number:</h4>";
+        resultsDiv.innerHTML += "<p>" + calculateCustomAddition(input) + "</p>";
+        resultsDiv.innerHTML += "<p>" + calculateCustomAddition(additionalLetters) + "</p>";
+        resultsDiv.innerHTML += "<p>" + calculateCustomAddition(decentLetters) + "</p>";
+    }
+
+    function refresh() {
+        // Clear input and results
+        document.getElementById("inputString").value = "";
+        document.getElementById("results").innerHTML = "";
+    }
+
+    function calculateLettersAddition(name, py) {
+        var sum = 0;
+        var letterValues = {
+            'A': py ? 1 : 4,
+            'B': py ? 2 : 6,
+            'C': py ? 4 : 26,
+            'D': py ? 5 : 18,
+            'E': py ? 3 : 12,
+            'F': py ? 8 : 4,
+            'G': py ? 10 : 21,
+            'H': py ? 28 : 28,
+            'I': py ? 15 : 11,
+            'J': py ? 15 : 11,
+            'K': py ? 16 : 16,
+            'L': py ? 21 : 12,
+            'M': py ? 19 : 19,
+            'N': py ? 26 : 11,
+            'O': py ? 8 : 9,
+            'P': py ? 77 : 12,
+            'Q': py ? 27 : 8,
+            'R': py ? 11 : 12,
+            'S': py ? 20 : 4,
+            'T': py ? 6 : 6,
+            'U': py ? 9 : 9,
+            'V': py ? 9 : 9,
+            'W': py ? 12 : 18,
+            'X': py ? 0 : 13,
+            'Y': py ? 50 : 2,
+            'Z': py ? 70 : 3
+        };
+
+        for (var i = 0; i < name.length; i++) {
+            var letter = name[i].toUpperCase();
+            if (letter in letterValues) {
+                sum += letterValues[letter];
+            }
+        }
+
+        return sum;
+    }
+
+    function calculateCustomAddition(name) {
+        var sum = 0;
+        var customLetterValues = {
+            'A': 1,
+            'B': 2,
+            'C': 3,
+            'D': 4,
+            'E': 5,
+            'F': 6,
+            'G': 7,
+            'H': 8,
+            'I': 9,
+            'J': 10,
+            'K': 11,
+            'L': 12,
+            'M': 13,
+            'N': 14,
+            'O': 15,
+            'P': 16,
+            'Q': 17,
+            'R': 18,
+            'S': 19,
+            'T': 20,
+            'U': 21,
+            'V': 22,
+            'W': 23,
+            'X': 24,
+            'Y': 25,
+            'Z': 26
+        };
+
+        for (var i = 0; i < name.length; i++) {
+            var letter = name[i].toUpperCase();
+            if (letter in customLetterValues) {
+                sum += customLetterValues[letter];
+            }
+        }
+        return sum;
+    }
+</script>
+
+</body>
+</html>
